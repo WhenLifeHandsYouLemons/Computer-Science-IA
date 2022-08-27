@@ -18,7 +18,7 @@ def success():
         f = request.files['uploaded_file']
         f.save(os.path.join(uploads_dir, f.filename))
         # Only if you have werkzeug.secure_filename() working
-        # f.save(f"//prcessing_images/{werkzeug.secure_filename(f.filename())}")
+        # f.save(os.path.join(uploads_dir, werkzeug.secure_filename(f.filename)))
         return render_template("upload_success.html", name=f.filename)
 
 @app.errorhandler(404)
