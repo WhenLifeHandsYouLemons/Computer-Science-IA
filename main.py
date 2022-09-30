@@ -26,4 +26,5 @@ def not_found(e):
     return render_template("error_404.html")
 
 
-app.run(host='localhost', port=8080, debug=True)
+# Only for running locally
+# app.run(host='localhost', port=8080, debug=True)
