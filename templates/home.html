@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Testing</title>
+        <title>Math Converter — Home</title>
         <link rel="stylesheet" href="static/home.css">
     </head>
     <body>
         <div class="upload_photo">
             <form action = "/upload_success" method = "post" enctype="multipart/form-data">
                 <input type="file" name="uploaded_file" class="upload_photo_button">
-                <input type="submit" value="📷 Upload Photo">
+                <p class="section_break"></p>
+                <input class="upload_photo_button" type="submit" value="Process!">
             </form>
+        </div>
+
+        <div class="help_button">
+            <button>Help</button>
         </div>
     </body>
 </html>

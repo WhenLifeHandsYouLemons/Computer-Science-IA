@@ -1,9 +1,22 @@
 body {
+    padding-top: 10%;
     font-family: monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.custom_file_upload {
-    border: 1px solid #ccc;
-    padding: 6px 12px;
+.upload_photo_button {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #333333;
     cursor: pointer;
+    padding: 5%;
+    border-radius: 15px;
+    background-color: #6699FF;
+}
+
+.section_break {
+    padding: 20%;
 }
