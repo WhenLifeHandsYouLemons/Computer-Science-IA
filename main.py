@@ -16,7 +16,7 @@ def home():
 def success():
     if request.method == 'POST':
         f = request.files['uploaded_file']
-        f.save(os.path.join(uploads_dir, f.filename))
+        f.save(os.path.join(uploads_dir, "image.jpg"))
         # Only if you have werkzeug.secure_filename() working
         # f.save(os.path.join(uploads_dir, werkzeug.secure_filename(f.filename)))
         return render_template("upload_success.html", name=f.filename)
@@ -26,4 +26,5 @@ def not_found(e):
     return render_template("error_404.html")
 
 
-app.run(host='localhost', port=8080, debug=True)
+# Only for running locally
+# app.run(host='localhost', port=8080, debug=True)
