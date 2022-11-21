@@ -27,4 +27,4 @@ def not_found(e):
 
 
 # Only for running locally
-# app.run(host='localhost', port=8080, debug=True)
+app.run(host='localhost', port=8080, debug=True)
