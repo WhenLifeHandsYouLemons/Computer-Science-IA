@@ -3,4 +3,5 @@
 __pycache__
 data
 *.rar
-datasets
+# datasets/clarencezhao
+datasets/clarencezhao_sagyamthapa
