@@ -1,5 +1,5 @@
-# Use like:
-# python extract.py -b 28 -d 2011 2012 2013 -c digits symbols operators -t 20
+# Use this:
+# python extract.py -b 100 -d 2011 2012 2013 -c digits symbols operators -t 1
 
 import os
 import argparse

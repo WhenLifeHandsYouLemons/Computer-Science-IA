@@ -29,6 +29,7 @@ plt.ion()   # interactive mode
 DATASET_PATH = "datasets/clarencezhao_sagyamthapa"
 
 
+# In case training data isn't in folders for ImageFolder function
 # class CustomDataset(Dataset):
 #     def __init__(self, img_dir, train, transform=None, target_transform=None):
 #         # All labels
