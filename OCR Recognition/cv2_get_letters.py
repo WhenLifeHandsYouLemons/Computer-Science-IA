@@ -2,7 +2,8 @@
 import cv2
 
 # Read image from which text needs to be extracted
-img = cv2.imread("images/handwritten_test.jpg")
+img = cv2.imread("images/handwritten_math_#2.jpg")
+img[img > 100] = 255  # type: ignore
 
 # Convert the image to gray scale
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -24,23 +25,36 @@ dilation = cv2.dilate(thresh1, rect_kernel, iterations = 1)
 contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
 # Creating a copy of image
+# img[img > 10] = 255
 im2 = img.copy()
 
+contours_filtered = []
+areas = []
+for cnt in contours:
+    x, y, w, h = cv2.boundingRect(cnt)
+    areas.append(w*h)
+
+print(areas)
 # Looping through the identified contours
 # Then rectangular part is cropped and passed on
-organs = []
+area_threshold = 600
+chars = []
+i = 0
 for cnt in contours:
     x, y, w, h = cv2.boundingRect(cnt)
 
-    # if (w >= 20) and (h >= 20):
-    # Drawing a rectangle on copied image
-    rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    if areas[i] > area_threshold:
+        # Drawing a rectangle on copied image
+        rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-    organs.append(rect)
+        # Cropping the text block for giving input to OCR
+        cropped = im2[y:y + h, x:x + w]
 
-    # Cropping the text block for giving input to OCR
-    cropped = im2[y:y + h, x:x + w]
+        # cv2.imshow("", cropped)
+        chars.append(cropped)
+        cv2.imshow("", img)
+        cv2.imshow("", rect)
 
-    cv2.imshow("", img)
-    cv2.imshow("", rect)
-    cv2.waitKey(0)
+    i += 1
+
+cv2.waitKey(0)
