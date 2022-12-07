@@ -2,15 +2,16 @@ import cv2
 import numpy as np
 import imutils
 
-# Gets the bounding boxes around each number or symbol
-def get_bounding_boxes(img_path):
-    # Read image from which text needs to be extracted
-    img = cv2.imread(img_path)
 
-    img[img > 100] = 255  # type: ignore    # https://stackoverflow.com/questions/19666626/replace-all-elements-of-python-numpy-array-that-are-greater-than-some-value/19666680#19666680
+# Gets the bounding boxes around each number or symbol
+def get_bounding_boxes(image_path):
+    # Read image from which text needs to be extracted
+    image = cv2.imread(image_path)
+
+    image[image > 100] = 255  # type: ignore    # https://stackoverflow.com/questions/19666626/replace-all-elements-of-python-numpy-array-that-are-greater-than-some-value/19666680#19666680
 
     # Convert the image to gray scale
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Performing OTSU threshold
     ret, thresh1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
@@ -29,9 +30,7 @@ def get_bounding_boxes(img_path):
     return contours
 
 # Uses the bounding boxes to crop the image into seperate numbers or symbols
-def get_chars(img_path, contours):
-    border_size = 25
-
+def get_chars(img_path, contours, debug=False):
     # Read image from which text needs to be extracted
     img = cv2.imread(img_path)
 
@@ -50,6 +49,7 @@ def get_chars(img_path, contours):
     # Looping through the identified contours
     # Filtering them and a rectangular part is cropped and returned
     area_threshold = 600
+    border_size = 25
     chars = []
     i = 0
     for cnt in contours:
@@ -94,8 +94,10 @@ def get_chars(img_path, contours):
 
             chars.append(padded)
 
-            cv2.imshow("", img)
-            cv2.imshow("", rect)
+            if debug is True:
+                cv2.imshow("", img)
+                cv2.imshow("", rect)
+                cv2.waitKey(0)
         i += 1
     return chars
 
@@ -106,13 +108,13 @@ def sort_chars(contours):
     for contour in contours:
         x, y, w, h = cv2.boundingRect(contour)
         all_x.append(x)
-    print(all_x)
 
     contours = np.array(contours, dtype=object)
 
     # Bubble sort the array
     sorted = False
     while sorted is False:
+        sorted = True
         for pos in range(len(all_x) - 1):
             if all_x[pos] > all_x[pos + 1]:
                 # Use all_x as a basis to sort the contours array
@@ -122,25 +124,9 @@ def sort_chars(contours):
                 temp_contour = contours[pos]
                 contours[pos] = contours[pos + 1]
                 contours[pos + 1] = temp_contour
-                sorted = True
+
         for i in range(len(all_x)-1):
             if all_x[i] > all_x[i + 1]:
                 sorted = False
 
-        print(all_x)
-
     return contours
-
-
-# EXAMPLE
-
-# Point to an image path
-image_path = "images/handwritten_test.jpg"
-
-# Get a list of bounding boxes to pass on
-cnts = get_bounding_boxes(image_path)
-
-# Get a list of cropped images using the bounding boxes
-chars = get_chars(image_path, cnts)
-
-cv2.waitKey(0)
