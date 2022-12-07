@@ -1,10 +1,33 @@
-<html>
-    <head>
-        <title>Success!</title>
-        <link rel="stylesheet" href="static/home.css">
-    </head>
-    <body>
-        <p>Upload success!</p>
-        <p>File Name: {{name}}</p>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Webpage Title -->
+    <title>Math Converter — Upload Success!</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="static/css/upload_success.css">
+
+    <!-- JavaScript Files -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Upload success!</h1>
+
+    <!-- Filename & Image preview -->
+    <div>
+    <p>File Name: {{name}}</p>
+    </div>
+
+    <!-- Math section -->
+    <div>
+        <p>{{math_input}}</p>
+        <p>{{answer}}</p>
+    </div>
+</body>
 </html>

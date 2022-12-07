@@ -1,4 +1,4 @@
-import sympy as sp
+import sympy as sp  # https://problemsolvingwithpython.com/10-Symbolic-Math/10.06-Solving-Equations/
 
 def solver(equation):
     if "=" in equation:
@@ -6,6 +6,7 @@ def solver(equation):
         return sp.solve(sympy_eq)
     else:
         return eval(equation)
+
 
 # Example
 print(solver("2*x+6=12"))
