@@ -10,7 +10,7 @@ print("Imported modules")
 
 # Variables to change
 IMG_PATH = "images/handwritten_test.jpg"
-model_path = "trained_models/100_epoch_model_2_#4.pth"
+model_path = "trained_models/2_layer_90.5%_model.pth"
 classes = ["(", ")", ".", "/", "8", "=", "5", "4", "-", "9", "1", "+", "7", "6", "3", "*", "2", "x", "y", "z", "0"]   # https://stackoverflow.com/questions/6477823/display-special-characters-when-using-print-statement/6478018#6478018
 print("Loaded image")
 
