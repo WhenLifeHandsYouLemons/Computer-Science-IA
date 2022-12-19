@@ -9,9 +9,9 @@ from augment_image import get_bounding_boxes, get_chars, sort_chars
 print("Imported modules")
 
 # Variables to change
-IMG_PATH = "images/equation_test.jpg"
-model_path = "trained_models/2_layer_99.7%_model.pth"
-classes = ["(", ")", ".", "/", "8", "=", "5", "4", "-", "9", "1", "+", "7", "6", "3", "*", "2", "x", "y", "z", "0"]   # https://stackoverflow.com/questions/6477823/display-special-characters-when-using-print-statement/6478018#6478018
+IMG_PATH = "images/2x=4.png"
+model_path = "trained_models/3_layer_98.8%_model.pth"
+classes = ["(", ")", ".", "/", "8", "=", "5", "4", "-", "9", "1", "+", "7", "6", "3", "*", "2", "x", "y", "z", "0"]   # https://stackoverflow.com/a/6478018
 print("Loaded image")
 
 # Get characters
@@ -34,7 +34,7 @@ model.eval()
 equation = []
 
 for char in chars:
-    char = Image.fromarray(char)  # https://stackoverflow.com/questions/43232813/convert-opencv-image-format-to-pil-image-format/43234001#43234001
+    char = Image.fromarray(char)  # https://stackoverflow.com/a/43234001
     char = transforms.ToTensor()(char)
     with torch.no_grad():
         pred = model(char)
