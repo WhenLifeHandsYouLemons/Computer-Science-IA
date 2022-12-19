@@ -46,7 +46,7 @@
                 <h2>File Name & Preview</h2>
                 <br>
                 <p>File Name: "{{ name }}"</p>
-                <img src="{{ url_for('static', filename='/images/uploads/image.jpg') }}" alt="Uploaded image">
+                <img src="{{ url_for('static', filename='/images/uploads/image.jpg') }}" alt="Uploaded image">  <!-- https://stackoverflow.com/a/48109486 -->
                 <br>
                 <br>
                 <a href="{{ url_for('home') }}" class="remove_file_button">Remove file (goes to the home page)</a>

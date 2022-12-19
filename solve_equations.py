@@ -6,7 +6,7 @@ def solver(equation):
             sympy_eq = sp.sympify("Eq(" + equation.replace("=", ",") + ")") # https://stackoverflow.com/a/50047781
             return f"$$ = {sp.solve(sympy_eq)} $$"
         else:
-            return f"$$ = {eval(equation)} $$" # type: ignore
+            return f"$$ = {eval(equation)} $$"
     except:
         return "The input doesn't seem to be correct, try typing out the equation"
 
