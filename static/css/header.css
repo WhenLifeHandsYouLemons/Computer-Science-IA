@@ -1,0 +1,53 @@
+:root {
+    --background-colour: #F2F2F2;
+    --background-text: #0D0D0D;
+    --title-colour: #7A8FA3;
+    --header-colour: #031626;
+    --button-colour: #7A8FA3;
+    --button-border: #031626;
+    --button-text: var(--background-text);
+}
+
+body {
+    /* Font styles */
+    font-family: monospace;
+
+    /* Other styles */
+    background-color: var(--background-colour);
+    color: var(--background-text);
+
+    padding: 0;
+    margin: 0;
+    height: 1vh;
+}
+
+header {
+    /* Alignment styles */
+    display: flex;
+    align-items: center;
+
+    /* Other styles */
+    background-color: var(--header-colour);
+
+    padding: 10px 10px 10px 10px;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--title-colour);
+}
+
+.theme_buttons {
+    /* Other styles */
+    padding: 0 0 0 1%;
+
+    cursor: pointer;
+}
+
+.heading {
+    padding: 0 80% 0 0;
+    margin: 0;
+    text-decoration: none;
+    color: var(--title-colour);
+}

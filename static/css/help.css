@@ -8,8 +8,16 @@
     --button-text: var(--background-text);
 }
 
-body {
-    padding-top: 5%;
-    padding-left: 5%;
-    font-family: monospace;
+main {
+    padding: 5px 20px;
+    background-color: var(--background-colour);
+}
+
+img {
+    width: 30%;
+    height: auto;
+
+    /* Border style */
+    border: 5px solid var(--button-border);
+    margin: 5px;
 }
