@@ -2,8 +2,9 @@ from torch import nn
 
 # Neural network configurations
 input_layer = 100 * 100
-layer_1 = 128
-layer_2 = 64
+layer_1 = 64
+layer_2 = 128
+layer_3 = 256
 output_layer = 21
 
 
@@ -16,7 +17,9 @@ class NeuralNetwork(nn.Module):
             nn.ReLU(),
             nn.Linear(layer_1, layer_2),
             nn.ReLU(),
-            nn.Linear(layer_2, output_layer)
+            nn.Linear(layer_2, layer_3),
+            nn.ReLU(),
+            nn.Linear(layer_3, output_layer)
         )
 
     def forward(self, x):
