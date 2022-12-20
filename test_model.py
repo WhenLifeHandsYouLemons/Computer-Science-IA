@@ -9,7 +9,7 @@ from augment_image import get_bounding_boxes, get_chars, sort_chars
 print("Imported modules")
 
 # Variables to change
-IMG_PATH = "images/2x=4.png"
+IMG_PATH = "static/images/examples/example1.jpg"
 model_path = "trained_models/3_layer_98.8%_model.pth"
 classes = ["(", ")", ".", "/", "8", "=", "5", "4", "-", "9", "1", "+", "7", "6", "3", "*", "2", "x", "y", "z", "0"]   # https://stackoverflow.com/a/6478018
 print("Loaded image")
