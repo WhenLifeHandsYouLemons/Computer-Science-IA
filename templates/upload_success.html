@@ -59,6 +59,14 @@
                 <p>{{ math_input }}</p>
                 <p>{{ answer }}</p>
             </div>
+
+            <!-- Edit input section -->
+            <div class="edit_section">
+                <form action="/typed" method="post" enctype="multipart/form-data">
+                    <input type="text" name="typed_math" class="typed_math_textbox" required="true">
+                    <input class="reproccess_button" type="submit" value="Re-process!">
+                </form>
+            </div>
         </div>
     </main>
 </body>

@@ -48,3 +48,19 @@ img {
     margin: 10% 0;
     padding: 1%;
 }
+
+.reproccess_button {
+    /* Font styles */
+    font-size: 14px;
+    color: var(--button-text);
+    text-decoration: none;
+
+    /* Border style */
+    border: 2px solid var(--button-border);
+    border-radius: 15px;
+    background-color: var(--button-colour);
+
+    /* Other styles */
+    cursor: pointer;
+    padding: 1%;
+}
