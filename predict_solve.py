@@ -9,7 +9,6 @@ from PIL import Image
 from neural_network import NeuralNetwork
 
 #* For solver
-import ast
 import sympy as sp  # https://problemsolvingwithpython.com/10-Symbolic-Math/10.06-Solving-Equations/
 
 dir = os.path.dirname(__file__)
@@ -86,45 +85,66 @@ def combine_equation(equation):
 def render_answer(answer):
     answer = answer.split(" ")
     answer_array = []
+
     # Go through all the characters in answer
     for i in answer:
-        # If they don't include a "/"
-        if "/" not in i:
-            # Append it to the new array
-            answer_array.append(i)
-        else:
+        if "*" in i:
+            temp_array = i.split("*")
+
+            # Go through the splitted array
+            for temp in temp_array:
+                answer_array.append(temp)
+                answer_array.append("*")
+
+            answer_array.pop()
+        elif "/" in i:
             temp_array = i.split("/")
+
             # Go through the splitted array
             for temp in temp_array:
                 answer_array.append(temp)
                 answer_array.append("/")
+
             answer_array.pop()
+        else:
+            answer_array.append(i)
 
     # Convert some special characters
     r_answer = []
     char = 0
+
     while char < len(answer_array):
         if answer_array[char] == "/":
             # check if previous append is same as numerator
             if len(r_answer) != 0:
                 if r_answer[-1] == answer_array[char-1]:
                     r_answer.pop()
+
             r_answer.append(r"\frac")  # https://stackoverflow.com/questions/6477823/display-special-characters-when-using-print-statement/6478018#6478018
             r_answer.append("{" + f"{answer_array[char-1]}" + "}")
             r_answer.append("{" + f"{answer_array[char+1]}" + "}")
+        elif "sqrt(" in answer_array[char]:
+            r_answer.append(r"\sqrt")
+            temp_array = answer_array[char].split("(")
+            temp_array = temp_array[1].split(")")[0]
+            r_answer.append("{" + temp_array + "}")
         else:
             # check if previous append is same as current append
             if len(r_answer) != 0:
                 if r_answer[-1] != "{" + f"{answer_array[char]}" + "}":
-                    r_answer.append(answer_array[char])
+                    if answer_array[char] == "I":
+                        r_answer.append("i")
+                    else:
+                        r_answer.append(answer_array[char])
             else:
                 r_answer.append(answer_array[char])
+
         char += 1
 
     r_answer = " ".join(r_answer)
     return r_answer
 
-def solver(s_equation, DEBUG = False):
+def solver(s_equation, DEBUG = True):
     try:
         var = ""
         for char in s_equation:
@@ -132,21 +152,22 @@ def solver(s_equation, DEBUG = False):
                 var = char
         if "=" in s_equation:
             sympy_eq = sp.sympify("Eq(" + s_equation.replace("=", ",") + ")") # https://stackoverflow.com/a/50047781
-            answer = sp.solve(sympy_eq)
+        else:
+            sympy_eq = sp.sympify("Eq(x," + s_equation + ")")
+        answer = sp.solve(sympy_eq)
 
-            if len(answer) == 1:
-                answer = render_answer(str(answer[0]))
-                return f"$$ {var} = {answer} $$"
-
-            answer_list = []
-            for i in answer:
-                answer_list.append(render_answer(str(i)))
-                answer_list.append(", ")
-            answer_list.pop()
-            answer = "".join(answer_list)
+        if len(answer) == 1:
+            answer = render_answer(str(answer[0])).lower()
             return f"$$ {var} = {answer} $$"
 
-        return f"$$ = {ast.literal_eval(s_equation)} $$"
+        answer_list = []
+        for i in answer:
+            answer_list.append(render_answer(str(i)).lower())
+            answer_list.append(", ")
+        answer_list.pop()
+
+        answer = "".join(answer_list)
+        return f"$$ {var} = {answer} $$"
     except Exception as e:
         if DEBUG is True:
             print(e)

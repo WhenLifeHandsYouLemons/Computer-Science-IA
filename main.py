@@ -1,6 +1,6 @@
 import os
 import flask
-from image_proccessing import augment_image, get_contours, sort_chars, get_chars
+from image_processing import augment_image, get_contours, sort_chars, get_chars
 from predict_solve import predict, combine_equation, solver
 
 app = flask.Flask(__name__)

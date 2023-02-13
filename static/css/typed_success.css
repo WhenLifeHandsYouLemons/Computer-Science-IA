@@ -18,12 +18,8 @@ main {
     text-align: center;
 }
 
-.image_file_section {
-    width: 50%;
-}
-
 .math_section {
-    width: 50%;
+    width: 100%;
 }
 
 .edit_section {
@@ -32,29 +28,6 @@ main {
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-
-img {
-    width: 50%; /* https://www.w3schools.com/css/css_rwd_images.asp */
-    height: auto;
-    border: 5px solid var(--button-border);   /* https://www.w3schools.com/howto/howto_css_border_image.asp */
-}
-
-.remove_file_button {
-    /* Font styles */
-    font-size: 14px;
-    color: var(--button-text);
-    text-decoration: none;
-
-    /* Border style */
-    border: 2px solid var(--button-border);
-    border-radius: 15px;
-    background-color: var(--button-colour);
-
-    /* Other styles */
-    cursor: pointer;
-    margin: 10% 0;
-    padding: 1%;
 }
 
 .reproccess_button {

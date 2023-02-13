@@ -1,4 +1,4 @@
-from image_proccessing import augment_image, get_contours, sort_chars, get_chars
+from image_processing import augment_image, get_contours, sort_chars, get_chars
 from predict_solve import predict, combine_equation, solver
 print("Imported modules")
 
@@ -26,6 +26,7 @@ equation_array = predict(chars, MODEL_NAME)
 r_equation, s_equation = combine_equation(equation_array)
 
 # Manually typing an equation
-r_equation, s_equation = combine_equation("2x+6=12")
+r_equation, s_equation = combine_equation("12x^3-28x^2-3x+8=0")
+r_equation, s_equation = combine_equation("9+3")
 
-print(r_equation + " = " + solver(s_equation))  # Debug is off
+print(r_equation + solver(s_equation))  # Debug is off
