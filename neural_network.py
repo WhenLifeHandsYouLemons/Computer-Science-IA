@@ -1,28 +1,32 @@
-from torch import nn
-
-# Neural network configurations
-input_layer = 100 * 100
-layer_1 = 64
-layer_2 = 128
-layer_3 = 256
-output_layer = 21
-
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
 
 class NeuralNetwork(nn.Module):
     def __init__(self):
         super().__init__()
-        self.flatten = nn.Flatten()
-        self.linear_relu_stack = nn.Sequential(
-            nn.Linear(input_layer, layer_1),
-            nn.ReLU(),
-            nn.Linear(layer_1, layer_2),
-            nn.ReLU(),
-            nn.Linear(layer_2, layer_3),
-            nn.ReLU(),
-            nn.Linear(layer_3, output_layer)
-        )
+
+        # First 2D convolutional layer, taking in 1 input channel (image),
+        # outputting 32 convolutional features, with a square kernel size of 3
+        self.conv1 = nn.Conv2d(1, 6, 5)
+        # Second 2D convolutional layer, taking in the 32 input layers,
+        # outputting 64 convolutional features, with a square kernel size of 3
+        self.conv2 = nn.Conv2d(6, 16, 5)
+        # First fully connected layer
+        # An affine operation: y = Wx + b
+        self.fc1 = nn.Linear(64 * 11 * 11, 120)
+        # Second fully connected layer
+        self.fc2 = nn.Linear(120, 84)
+        # Third fully connected layer outputting our possible labels
+        self.fc3 = nn.Linear(84, 20)
 
     def forward(self, x):
-        x = self.flatten(x)
-        logits = self.linear_relu_stack(x)
-        return logits
+        # Max pooling over a (2, 2) window
+        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
+        # If the size is a square, you can specify with a single number
+        x = F.max_pool2d(F.relu(self.conv2(x)), 2)
+        x = torch.flatten(x, 1) # flatten all dimensions except the batch dimension
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x

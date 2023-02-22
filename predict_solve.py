@@ -20,13 +20,14 @@ def predict(CHARS, MODEL_PATH, DEBUG = False):
     model.eval()
 
     #* Initialise character classes
-    classes = ["(", ")", ".", "/", "8", "=", "5", "4", "-", "9", "1", "+", "7", "6", "3", "*", "2", "x", "y", "z", "0"]
+    classes = ("(", ")", ".", "/", "8", "=", "5", "4", "-", "9", "1", "+", "7", "6", "3", "*", "2", "x", "y", "0")
     equation = []
 
     #* Put each character image through the mdoel
     for char in CHARS:
         char = Image.fromarray(char)  # https://stackoverflow.com/a/43234001
         char = transforms.ToTensor()(char)
+        char = char[None, :]    # https://sparrow.dev/adding-a-dimension-to-a-tensor-in-pytorch/
         with torch.no_grad():
             pred = model(char)
             best = pred[0].argmax(0)
@@ -43,6 +44,7 @@ def combine_equation(equation):
     s_equation_array = []
     for char in equation:
         s_equation_array.append(char)
+
     r_equation = []
     for char in s_equation_array:
         if char == "/":
@@ -82,66 +84,9 @@ def combine_equation(equation):
 
     return r_equation, s_equation
 
-def render_answer(answer):
-    answer = answer.split(" ")
-    answer_array = []
-
-    # Go through all the characters in answer
-    for i in answer:
-        if "*" in i:
-            temp_array = i.split("*")
-
-            # Go through the splitted array
-            for temp in temp_array:
-                answer_array.append(temp)
-                answer_array.append("*")
-
-            answer_array.pop()
-        elif "/" in i:
-            temp_array = i.split("/")
-
-            # Go through the splitted array
-            for temp in temp_array:
-                answer_array.append(temp)
-                answer_array.append("/")
-
-            answer_array.pop()
-        else:
-            answer_array.append(i)
-
-    # Convert some special characters
-    r_answer = []
-    char = 0
-
-    while char < len(answer_array):
-        if answer_array[char] == "/":
-            # check if previous append is same as numerator
-            if len(r_answer) != 0:
-                if r_answer[-1] == answer_array[char-1]:
-                    r_answer.pop()
-
-            r_answer.append(r"\frac")  # https://stackoverflow.com/questions/6477823/display-special-characters-when-using-print-statement/6478018#6478018
-            r_answer.append("{" + f"{answer_array[char-1]}" + "}")
-            r_answer.append("{" + f"{answer_array[char+1]}" + "}")
-        elif "sqrt(" in answer_array[char]:
-            r_answer.append(r"\sqrt")
-            temp_array = answer_array[char].split("(")
-            temp_array = temp_array[1].split(")")[0]
-            r_answer.append("{" + temp_array + "}")
-        else:
-            # check if previous append is same as current append
-            if len(r_answer) != 0:
-                if r_answer[-1] != "{" + f"{answer_array[char]}" + "}":
-                    if answer_array[char] == "I":
-                        r_answer.append("i")
-                    else:
-                        r_answer.append(answer_array[char])
-            else:
-                r_answer.append(answer_array[char])
-
-        char += 1
-
-    r_answer = " ".join(r_answer)
+def render_math(answer):
+    sp.init_printing()  # https://stackoverflow.com/a/50447890
+    r_answer = sp.latex(sp.sympify(f'{"".join(answer)}'))   # https://stackoverflow.com/a/4308411
     return r_answer
 
 def solver(s_equation, DEBUG = True):
@@ -157,12 +102,12 @@ def solver(s_equation, DEBUG = True):
         answer = sp.solve(sympy_eq)
 
         if len(answer) == 1:
-            answer = render_answer(str(answer[0])).lower()
+            answer = render_math(str(answer[0])).lower()
             return f"$$ {var} = {answer} $$"
 
         answer_list = []
         for i in answer:
-            answer_list.append(render_answer(str(i)).lower())
+            answer_list.append(render_math(str(i)).lower())
             answer_list.append(", ")
         answer_list.pop()
 

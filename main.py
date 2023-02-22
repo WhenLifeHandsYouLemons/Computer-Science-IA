@@ -9,7 +9,7 @@ dir = os.path.dirname(__file__) # https://stackoverflow.com/a/918178
 UPLOADS_DIR = os.path.join(dir, "static", "images", "uploads")
 EXAMPLE_FOLDER = os.path.join(dir, "static", "images", "examples")
 IMG_PATH = os.path.join(UPLOADS_DIR, "image.jpg")
-MODEL_PATH = os.path.join(dir, "trained_models", "3_layer_model.pth")
+MODEL_PATH = os.path.join(dir, "trained_models", "2c-3l-2p-3e-cnn_model-#2.pth")
 os.makedirs(UPLOADS_DIR, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOADS_DIR   # https://stackoverflow.com/a/46794505
 app.config["EXAMPLE_FOLDER"] = EXAMPLE_FOLDER
@@ -37,8 +37,10 @@ def upload_success():
             sorted_contours = sort_chars(contours)
 
             # Using the contours, get each character
-            chars = get_chars(IMG_PATH, sorted_contours, 600, 25, False)
+            chars = get_chars(IMG_PATH, sorted_contours, 600, 25)
             equation_array = predict(chars, MODEL_PATH)
+
+            # Combine the equation into two different styles
             render_equation, solve_equation = combine_equation(equation_array)
 
             # Use the prediction to get an answer
