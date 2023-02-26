@@ -38,8 +38,8 @@ function darkMode() {
 //* Or set it based on what they decide
 const currentTheme = localStorage.getItem("theme");
 // If the current theme in localStorage is "dark"
-if (currentTheme == "light") {
-    lightMode();
-} else {
+if (currentTheme == "dark") {
     darkMode();
+} else {
+    lightMode();
 }

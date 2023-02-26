@@ -7,7 +7,7 @@ def augment_image(IMG_PATH = None):
     image = cv2.imread(IMG_PATH)
 
     # Make the edges sharper by removing the gradient between the writing and the background
-    image[image > 100] = 255    # https://stackoverflow.com/a/19666680
+    image[image > 75] = 255    # https://stackoverflow.com/a/19666680
 
     # Convert the image to gray scale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -15,10 +15,10 @@ def augment_image(IMG_PATH = None):
     # Performing OTSU threshold
     ret, thresh1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
 
-    # Specify structure shape and kernel size.
-    # Kernel size increases or decreases the area of the rectangle to be detected.
-    # A smaller value like (10, 10) will detect each word instead of a sentence.
-    rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 45))
+    # Specify structure shape and kernel size
+    # Kernel size increases or decreases the area of the rectangle to be detected
+    # A smaller value like (10, 10) will detect each word instead of a sentence
+    rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 45))
 
     # Applying dilation on the threshold image
     dilation_image = cv2.dilate(thresh1, rect_kernel, iterations = 1)

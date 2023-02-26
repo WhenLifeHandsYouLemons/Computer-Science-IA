@@ -41,16 +41,25 @@
         <p>Try looking at the example images below for how the images should look:</p>
         <!-- Example images -->
         <div>
-            <img src="{{ url_for('static', filename='/images/examples/example1.jpg') }}" alt="Help image #1">
-            <img src="{{ url_for('static', filename='/images/examples/example2.jpg') }}" alt="Help image #2">
-            <img src="{{ url_for('static', filename='/images/examples/example3.jpg') }}" alt="Help image #3">
-            <img src="{{ url_for('static', filename='/images/examples/example4.jpg') }}" alt="Help image #4">
+            <img src="{{ url_for('static', filename='/images/examples/example1.jpg') }}" alt="An image showing the equation 2x+6=12">
+            <img src="{{ url_for('static', filename='/images/examples/example2.jpg') }}" alt="A white image with the equation 2x=4 at the center">
+            <img src="{{ url_for('static', filename='/images/examples/example3.jpg') }}" alt="9*4 written in black ink on the middle of a white background">
+            <img src="{{ url_for('static', filename='/images/examples/example4.jpg') }}" alt="An unfiltered image showing 2+2*36/4-1">
+            <img src="{{ url_for('static', filename='/images/examples/example5.jpg') }}" alt="A normal photo of a long equation on lined paper">
         </div>
+
+        <p>Note: Photos of equations on blank paper with even lighting conditions work best, however lined paper is also ok to use although the accuracy might be lower. If the equation doesn't show up correctly, you can always type out the equation manually in the text box!</p>
 
         <h3>Walkthrough</h3>
         <p>You might've also not done the process correctly. Here's a video to show you how it should work:</p>
-        <!-- Insert video here -->
-        <p><i><b>TO BE ADDED</b></i></p>
+
+        <!-- Help video -->
+        <div id="video_div">
+            <video width="320" controls muted>
+                <source src="static/videos/usage_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
     </main>
 
     <!-- JavaScript Files -->

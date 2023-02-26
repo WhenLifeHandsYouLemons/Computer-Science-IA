@@ -7,10 +7,10 @@ class NeuralNetwork(nn.Module):
         super().__init__()
 
         # First 2D convolutional layer, taking in 1 input channel (image),
-        # outputting 32 convolutional features, with a square kernel size of 3
+        # outputting 6 convolutional features, with a square kernel size of 5
         self.conv1 = nn.Conv2d(1, 6, 5)
-        # Second 2D convolutional layer, taking in the 32 input layers,
-        # outputting 64 convolutional features, with a square kernel size of 3
+        # Second 2D convolutional layer, taking in the 6 input layers,
+        # outputting 16 convolutional features, with a square kernel size of 5
         self.conv2 = nn.Conv2d(6, 16, 5)
         # First fully connected layer
         # An affine operation: y = Wx + b

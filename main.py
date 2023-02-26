@@ -37,7 +37,7 @@ def upload_success():
             sorted_contours = sort_chars(contours)
 
             # Using the contours, get each character
-            chars = get_chars(IMG_PATH, sorted_contours, 600, 25)
+            chars = get_chars(IMG_PATH, sorted_contours, 500, 23)
             equation_array = predict(chars, MODEL_PATH)
 
             # Combine the equation into two different styles
@@ -50,6 +50,7 @@ def upload_success():
             return flask.render_template("upload_success.html", name=f.filename, math_input=render_equation, answer=answer)
         # If it doesn't work for any reason, go to the help page
         except Exception as e:
+            print(e)
             os.remove(os.path.join(UPLOADS_DIR, "image.jpg"))
             return flask.render_template("help.html")
 

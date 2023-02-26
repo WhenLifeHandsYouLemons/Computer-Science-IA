@@ -41,9 +41,7 @@ def predict(CHARS, MODEL_PATH, DEBUG = False):
     return equation
 
 def combine_equation(equation):
-    s_equation_array = []
-    for char in equation:
-        s_equation_array.append(char)
+    s_equation_array = list(equation)
 
     r_equation = []
     for char in s_equation_array:
@@ -84,10 +82,10 @@ def combine_equation(equation):
 
     return r_equation, s_equation
 
-def render_math(answer):
+def render_math(math):
     sp.init_printing()  # https://stackoverflow.com/a/50447890
-    r_answer = sp.latex(sp.sympify(f'{"".join(answer)}'))   # https://stackoverflow.com/a/4308411
-    return r_answer
+    r_math = sp.latex(sp.sympify(f'{"".join(math)}'))   # https://stackoverflow.com/a/4308411
+    return r_math
 
 def solver(s_equation, DEBUG = True):
     try:
