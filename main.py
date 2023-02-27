@@ -73,7 +73,3 @@ def help_page():
 @app.errorhandler(404)
 def not_found(e):
     return flask.render_template("error_404.html")
-
-
-# Only for running locally
-app.run(host="localhost", port=8080, debug=True)
