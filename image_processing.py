@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Gets the contours of the individual characters in the image
-def get_contours(IMG_PATH = None):
+def get_contours(IMG_PATH):
     # Read image from which text needs to be extracted
     image = cv2.imread(IMG_PATH)
 
