@@ -2,6 +2,7 @@
 Adapted from: https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
 Datasets used:
 1. https://www.isical.ac.in/~crohme/CROHME_data.html
+    a. Used https://github.com/ThomasLech/CROHME_extractor to extract CROHME data into image files
 2. https://www.kaggle.com/datasets/sagyamthapa/handwritten-math-symbols
 3. https://www.kaggle.com/datasets/clarencezhao/handwritten-math-symbol-dataset
 """
@@ -18,7 +19,7 @@ from neural_network import NeuralNetwork
 """
 Loading dataset and sorting it into training testing
 """
-DATASET_PATH = "datasets/combined"
+DATASET_PATH = "datasets"
 
 # Predefined transforms to convert PIL image to Tensor format and have one colour channel
 transform = transforms.Compose([    # https://discuss.pytorch.org/t/image-file-reading-typeerror-batch-must-contain-tensors-numbers-dicts-or-lists-found-class-pil-image-image/9909
