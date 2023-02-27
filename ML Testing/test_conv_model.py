@@ -5,7 +5,7 @@ from PIL import Image
 from neural_network import NeuralNetwork
 
 # For augmenting input image
-from image_processing import augment_image, get_contours, sort_chars, get_chars
+from image_processing import get_contours, sort_chars, get_chars
 print("Imported modules")
 
 # Variables to change
@@ -14,8 +14,7 @@ model_path = "trained_models/2c-3l-2p-cnn_model-#2.pth"
 classes = ("(", ")", ".", "/", "8", "=", "5", "4", "-", "9", "1", "+", "7", "6", "3", "*", "2", "x", "y", "0")   # https://stackoverflow.com/a/6478018
 print("Loaded image and classes")
 
-augmented_img = augment_image(IMG_PATH)
-contours = get_contours(augmented_img)
+contours = get_contours(IMG_PATH)
 print("Got contours")
 
 sorted_contours = sort_chars(contours)

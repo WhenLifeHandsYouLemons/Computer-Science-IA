@@ -1,4 +1,4 @@
-from image_processing import augment_image, get_contours, sort_chars, get_chars
+from image_processing import get_contours, sort_chars, get_chars
 from predict_solve import predict, combine_equation, solver
 print("Imported modules")
 
@@ -9,10 +9,7 @@ print("Loaded image")
 
 
 # Get characters
-augmented_img = augment_image(IMG_PATH)
-print("Augmented image")
-
-contours = get_contours(augmented_img)
+contours = get_contours(IMG_PATH)
 print("Got contours")
 
 sorted_contours = sort_chars(contours)

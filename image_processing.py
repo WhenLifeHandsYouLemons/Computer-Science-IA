@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 
-# Make image clearer
-def augment_image(IMG_PATH = None):
+# Gets the contours of the individual characters in the image
+def get_contours(IMG_PATH = None):
     # Read image from which text needs to be extracted
     image = cv2.imread(IMG_PATH)
 
@@ -22,12 +22,10 @@ def augment_image(IMG_PATH = None):
 
     # Applying dilation on the threshold image
     dilation_image = cv2.dilate(thresh1, rect_kernel, iterations = 1)
-    return dilation_image
 
-# Gets the contours of the individual characters in the image
-def get_contours(DILATED_IMG):
+
     # Finding contours
-    contours, hierarchy = cv2.findContours(DILATED_IMG, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    contours, hierarchy = cv2.findContours(dilation_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
     # Return an array of contours
     return contours

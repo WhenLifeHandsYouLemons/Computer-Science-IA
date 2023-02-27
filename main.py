@@ -1,6 +1,6 @@
 import os
 import flask
-from image_processing import augment_image, get_contours, sort_chars, get_chars
+from image_processing import get_contours, sort_chars, get_chars
 from predict_solve import predict, combine_equation, solver
 
 app = flask.Flask(__name__)
@@ -32,8 +32,7 @@ def upload_success():
         # Try and run the image through the model
         try:
             # Augment image & get contours
-            augmented_img = augment_image(IMG_PATH)
-            contours = get_contours(augmented_img)
+            contours = get_contours(IMG_PATH)
             sorted_contours = sort_chars(contours)
 
             # Using the contours, get each character
