@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 
-PATH = "datasets/combined/train/"
+PATH = "datasets/train/"
 
 classes = os.listdir(f"{PATH}")
 
