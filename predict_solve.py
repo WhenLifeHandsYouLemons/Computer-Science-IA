@@ -87,7 +87,7 @@ def render_math(math):
     r_math = sp.latex(sp.sympify(f'{"".join(math)}'))   # https://stackoverflow.com/a/4308411
     return r_math
 
-def solver(s_equation, DEBUG = True):
+def solver(s_equation, DEBUG = False):
     try:
         var = ""
         for char in s_equation:

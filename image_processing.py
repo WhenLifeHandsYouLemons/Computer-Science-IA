@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Gets the contours of the individual characters in the image
-def get_contours(IMG_PATH = None):
+def get_contours(IMG_PATH):
     # Read image from which text needs to be extracted
     image = cv2.imread(IMG_PATH)
 
@@ -132,7 +132,15 @@ def get_chars(IMG_PATH, CONTOURS, AREA_THRESH, BORDER_SIZE, DEBUG = False):
             dY = int(max(0, 100 - tH) / 2)
 
             # pad the image and force 28x28 dimensions
-            padded = cv2.copyMakeBorder(thresh, top=dY, bottom=dY, left=dX, right=dX, borderType=cv2.BORDER_CONSTANT, value=(255, 255, 255))
+            padded = cv2.copyMakeBorder(
+                thresh,
+                top=dY,
+                bottom=dY,
+                left=dX,
+                right=dX,
+                borderType=cv2.BORDER_CONSTANT,
+                value=(255, 255, 255)
+            )
             padded = cv2.resize(padded, (100, 100))
 
             padded[padded > 75] = 255
