@@ -132,7 +132,15 @@ def get_chars(IMG_PATH, CONTOURS, AREA_THRESH, BORDER_SIZE, DEBUG = False):
             dY = int(max(0, 100 - tH) / 2)
 
             # pad the image and force 28x28 dimensions
-            padded = cv2.copyMakeBorder(thresh, top=dY, bottom=dY, left=dX, right=dX, borderType=cv2.BORDER_CONSTANT, value=(255, 255, 255))
+            padded = cv2.copyMakeBorder(
+                thresh,
+                top=dY,
+                bottom=dY,
+                left=dX,
+                right=dX,
+                borderType=cv2.BORDER_CONSTANT,
+                value=(255, 255, 255)
+            )
             padded = cv2.resize(padded, (100, 100))
 
             padded[padded > 75] = 255
