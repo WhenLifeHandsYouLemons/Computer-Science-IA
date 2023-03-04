@@ -14,7 +14,7 @@ class NeuralNetwork(nn.Module):
         self.conv2 = nn.Conv2d(6, 16, 5)
         # First fully connected layer
         # An affine operation: y = Wx + b
-        self.fc1 = nn.Linear(64 * 11 * 11, 120)
+        self.fc1 = nn.Linear(22 * 22 * 16, 120)
         # Second fully connected layer
         self.fc2 = nn.Linear(120, 84)
         # Third fully connected layer outputting our possible labels
