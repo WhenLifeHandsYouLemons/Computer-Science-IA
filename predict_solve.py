@@ -1,5 +1,7 @@
-# Built using: https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html
-# With help of: https://github.com/paulbaumgarten/pytorch-mnist-demo
+"""
+Built using: https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html
+With help of: https://github.com/paulbaumgarten/pytorch-mnist-demo
+"""
 import os
 
 #* For predicting

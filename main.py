@@ -25,7 +25,6 @@ def home():
 def upload_success():
     if flask.request.method == "POST":
         f = flask.request.files["uploaded_file"]
-
         # Save the image with the filename "image.jpg" for ease of access
         f.save(IMG_PATH)
 

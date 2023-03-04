@@ -18,7 +18,7 @@ def get_contours(IMG_PATH):
     # Specify structure shape and kernel size
     # Kernel size increases or decreases the area of the rectangle to be detected
     # A smaller value like (10, 10) will detect each word instead of a sentence
-    rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 45))
+    rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (15, 45))
 
     # Applying dilation on the threshold image
     dilation_image = cv2.dilate(thresh1, rect_kernel, iterations = 1)
@@ -148,8 +148,8 @@ def get_chars(IMG_PATH, CONTOURS, AREA_THRESH, BORDER_SIZE, DEBUG = False):
             chars.append(padded)
 
             if DEBUG is True:
-                cv2.imshow("", img)
-                # cv2.imshow("", padded)
+                # cv2.imshow("", img)
+                cv2.imshow("", padded)
                 cv2.imshow("", rect)
                 cv2.waitKey(0)
         i += 1
